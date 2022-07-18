@@ -7,6 +7,7 @@ A mobile version prototype based on the low-latency video conferencing desktop a
 First, make sure to have the `flutter` CLI. You can install it by following the official [Flutter installation guide](https://docs.flutter.dev/get-started/install).
 
 ```shell
+$ flutter pub get
 $ flutter run
 ```
 
