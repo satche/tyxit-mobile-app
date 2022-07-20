@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'src/core/constant/style/themes.dart';
-import 'src/features/groups.dart';
+import 'src/features/groups/widget/groups_page.dart';
 
 void main() {
   runApp(const MainApp());

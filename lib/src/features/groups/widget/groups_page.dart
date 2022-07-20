@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
-import '../core/components/tyxit_logo.dart';
+import '../../../core/components/tyxit_logo.dart';
+import '../../app/data/database.dart';
+import '../data/group.dart';
 
 class GroupsPage extends StatefulWidget {
   const GroupsPage({Key? key}) : super(key: key);
@@ -9,41 +11,37 @@ class GroupsPage extends StatefulWidget {
 }
 
 class _GroupsPageState extends State<GroupsPage> {
-  int _counter = 0;
+  Database database = Database();
 
-  void _incrementCounter() {
+  addGroup(newGroup) {
     setState(() {
-      _counter++;
+      database.addGroup(newGroup);
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: TyxitLogo(), actions: <Widget>[
+      appBar: AppBar(title: const TyxitLogo(), actions: <Widget>[
         IconButton(
           icon: const Icon(Icons.notifications),
           tooltip: 'Show notifications',
-          onPressed: _incrementCounter,
+          onPressed: () {},
         ),
       ]),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
             Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+              'Number of groups: ${database.groups.length}',
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: () => addGroup(Group("test")),
+        tooltip: 'Add group',
         child: const Icon(Icons.add),
       ),
     );
