@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:tyxit_mobile_app/src/core/components/tyxit_logo.dart';
-import 'package:tyxit_mobile_app/src/core/constant/style/padding.dart';
+import 'package:tyxit_mobile_app/src/core/constant/style/spacing.dart';
 import '../../app/data/database.dart';
 import '../data/group.dart';
 import 'create_group_page.dart';
@@ -26,7 +26,7 @@ class _GroupsPageState extends State<GroupsPage> {
         ),
       ]),
       body: Container(
-        padding: PaddingBase.container,
+        padding: Spacing.container,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
