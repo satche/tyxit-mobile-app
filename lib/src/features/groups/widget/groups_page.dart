@@ -25,19 +25,18 @@ class _GroupsPageState extends State<GroupsPage> {
           onPressed: () {},
         ),
       ]),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            if (database.groups.isEmpty)
+      body: Container(
+          // mainAxisAlignment: MainAxisAlignment.center,
+
+          padding: const EdgeInsets.all(8.0),
+          child:
+              // if (database.groups.isEmpty)
               const Text(
                   "It seems you don' have any groups yet. Why don't you create one?")
-            else ...[
-              for (Group group in database.groups) Text(group.name),
-            ],
-          ],
-        ),
-      ),
+          // else ...[
+          //   for (Group group in database.groups) Text(group.name),
+          // ]
+          ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => Navigator.push(context,
             MaterialPageRoute(builder: (context) => const CreateGroupPage())),
