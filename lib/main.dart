@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
-import 'src/core/constant/style/themes.dart';
-import 'src/features/groups/widget/groups_page.dart';
+import 'package:provider/provider.dart';
+import 'package:tyxit_mobile_app/src/features/app/data/database.dart';
+import 'package:tyxit_mobile_app/src/core/constant/style/themes.dart';
+import 'package:tyxit_mobile_app/src/features/groups/widget/groups_page.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => Database(),
+      child: const MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {

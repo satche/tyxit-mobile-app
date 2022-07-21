@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../app/data/database.dart';
 import 'package:tyxit_mobile_app/src/core/components/avatar.dart';
 import 'package:tyxit_mobile_app/src/core/constant/style/spacing.dart';
+import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
 
 class CreateGroupPage extends StatefulWidget {
   const CreateGroupPage({Key? key}) : super(key: key);
@@ -31,7 +34,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
               ),
             ),
             ElevatedButton(
-                onPressed: onPressed, child: const Text("Create Group")),
+                onPressed: () => Provider.of<Database>(context, listen: false)
+                    .addGroup(Group("Test")),
+                child: const Text("Create Group")),
           ],
         ),
       ),

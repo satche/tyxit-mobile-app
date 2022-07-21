@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
+import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/src/core/components/tyxit_logo.dart';
 import 'package:tyxit_mobile_app/src/core/constant/style/spacing.dart';
 import '../../app/data/database.dart';
-import '../data/group.dart';
 import 'create_group_page.dart';
 
 class GroupsPage extends StatefulWidget {
@@ -13,8 +13,6 @@ class GroupsPage extends StatefulWidget {
 }
 
 class _GroupsPageState extends State<GroupsPage> {
-  Database database = Database();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,16 +25,24 @@ class _GroupsPageState extends State<GroupsPage> {
       ]),
       body: Container(
         padding: Spacing.container,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            if (database.groups.isEmpty)
-              const Text(
-                  "It seems you don' have any groups yet. Why don't you create one?")
-            else ...[
-              for (Group group in database.groups) Text(group.name),
-            ],
-          ],
+        child: Consumer<Database>(
+          builder: (context, db, child) {
+            if (db.groups.isEmpty) {
+              return const Center(
+                  child: Text(
+                      "It seems you don' have any groups yet. Why don't you create one?"));
+            }
+            return ListView.builder(
+              itemCount: db.groups.length,
+              itemBuilder: (context, index) {
+                final group = db.groups[index];
+                return ListTile(
+                  title: Text(group.name),
+                  // onTap: () {},
+                );
+              },
+            );
+          },
         ),
       ),
       floatingActionButton: FloatingActionButton(

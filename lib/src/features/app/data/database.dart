@@ -1,7 +1,11 @@
-import '../../groups/data/group.dart';
+import 'package:flutter/material.dart';
+import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
 
-class Database {
+class Database extends ChangeNotifier {
   final List<Group> groups = [];
 
-  addGroup(Group group) => groups.add(group);
+  addGroup(Group group) {
+    groups.add(group);
+    notifyListeners();
+  }
 }
