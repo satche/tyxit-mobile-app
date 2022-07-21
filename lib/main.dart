@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tyxit_mobile_app/src/features/app/data/database.dart';
-import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
 import 'src/core/constant/style/themes.dart';
 import 'src/features/groups/widget/groups_page.dart';
 
