@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
+import 'package:tyxit_mobile_app/src/core/constant/style/padding.dart';
 
 class CreateGroupPage extends StatefulWidget {
   const CreateGroupPage({Key? key}) : super(key: key);
@@ -19,7 +19,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
       appBar: AppBar(
         title: const Text('Create Group'),
       ),
-      body: Center(
+      body: Container(
+        padding: PaddingBase.container,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
@@ -30,7 +31,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
                 labelText: 'Group Name',
               ),
             ),
-            TextButton(onPressed: onPressed, child: const Text("Create Group")),
+            ElevatedButton(
+                onPressed: onPressed, child: const Text("Create Group")),
           ],
         ),
       ),
