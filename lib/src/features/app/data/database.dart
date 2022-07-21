@@ -1,7 +1,8 @@
+import 'package:flutter/material.dart';
 import '../../groups/data/group.dart';
 
 class Database {
-  List<Group> groups = [];
+  final List<Group> groups = [];
 
   addGroup(Group group) => groups.add(group);
 }

@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 import '../../../core/components/tyxit_logo.dart';
+import '../../../core/constant/style/text_styles.dart';
 import '../../app/data/database.dart';
 import '../data/group.dart';
+import 'create_group_page.dart';
 
 class GroupsPage extends StatefulWidget {
   const GroupsPage({Key? key}) : super(key: key);
@@ -12,12 +14,6 @@ class GroupsPage extends StatefulWidget {
 
 class _GroupsPageState extends State<GroupsPage> {
   Database database = Database();
-
-  addGroup(newGroup) {
-    setState(() {
-      database.addGroup(newGroup);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,14 +29,18 @@ class _GroupsPageState extends State<GroupsPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Number of groups: ${database.groups.length}',
-            ),
+            if (database.groups.isEmpty)
+              const Text(
+                  "It seems you don' have any groups yet. Why don't you create one?")
+            else ...[
+              for (Group group in database.groups) Text(group.name),
+            ],
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => addGroup(Group("test")),
+        onPressed: () => Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const CreateGroupPage())),
         tooltip: 'Add group',
         child: const Icon(Icons.add),
       ),
