@@ -36,9 +36,13 @@ class _GroupsPageState extends State<GroupsPage> {
               itemCount: db.groups.length,
               itemBuilder: (context, index) {
                 final group = db.groups[index];
-                return ListTile(
-                  title: Text(group.name),
-                  // onTap: () {},
+                return Card(
+                  margin: const EdgeInsets.symmetric(vertical: Spacing.medium),
+                  child: ListTile(
+                    leading: Image(image: group.picture),
+                    title: Text(group.name.toString()),
+                    // onTap: () {},
+                  ),
                 );
               },
             );

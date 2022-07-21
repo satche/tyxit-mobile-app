@@ -13,8 +13,12 @@ class CreateGroupPage extends StatefulWidget {
 }
 
 class _CreateGroupPageState extends State<CreateGroupPage> {
-  onPressed() {
-    setState(() {});
+  final fieldController = TextEditingController();
+
+  @override
+  void dispose() {
+    fieldController.dispose();
+    super.dispose();
   }
 
   @override
@@ -28,14 +32,15 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
         child: Column(
           children: <Widget>[
             Avatar(url: 'assets/images/group_picture/default.png'),
-            const TextField(
-              decoration: InputDecoration(
+            TextField(
+              controller: fieldController,
+              decoration: const InputDecoration(
                 labelText: 'Group Name',
               ),
             ),
             ElevatedButton(
                 onPressed: () => Provider.of<Database>(context, listen: false)
-                    .addGroup(Group("Test")),
+                    .addGroup(Group(name: fieldController.text)),
                 child: const Text("Create Group")),
           ],
         ),

@@ -25,6 +25,7 @@ class TyxitThemes {
           onError: ColorsBase.white,
         ),
         scaffoldBackgroundColor: ColorsBase.black,
-        backgroundColor: ColorsBase.grey);
+        backgroundColor: ColorsBase.grey,
+        cardColor: ColorsBase.black);
   }
 }
