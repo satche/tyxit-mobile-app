@@ -7,7 +7,7 @@ abstract class TyxitInputDecoration {
     return InputDecorationTheme(
       fillColor: ColorsBase.grey1,
       filled: true,
-      errorStyle: TextStyleBase.textStyles().normal12,
+      errorStyle: TextStyle.mainTextStyles().normal12,
       border: OutlineInputBorder(
         borderRadius: BorderRadius.circular(8),
       ),
