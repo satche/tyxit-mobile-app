@@ -24,7 +24,7 @@ class _GroupsPageState extends State<GroupsPage> {
         ),
       ]),
       body: Container(
-        padding: Spacing.container,
+        padding: const EdgeInsets.symmetric(vertical: Spacing.medium),
         child: Consumer<Database>(
           builder: (context, db, child) {
             if (db.groups.isEmpty) {
