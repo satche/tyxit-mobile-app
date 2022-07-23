@@ -19,9 +19,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
   void onPressed() {
     final db = Provider.of<Database>(context, listen: false);
     final group = Group(name: fieldController.text);
-    db.groups.add(group);
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => ChatPage(group)));
+    db.addGroup(group);
+    Navigator.pushNamed(context, "/groups");
   }
 
   @override
@@ -48,8 +47,9 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
               ),
             ),
             ElevatedButton(
-                onPressed: () => onPressed(),
-                child: const Text("Create Group")),
+              onPressed: () => onPressed(),
+              child: const Text("Create Group"),
+            ),
           ],
         ),
       ),

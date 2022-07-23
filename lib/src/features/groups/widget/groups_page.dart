@@ -29,8 +29,9 @@ class _GroupsPageState extends State<GroupsPage> {
           builder: (context, db, child) {
             if (db.groups.isEmpty) {
               return const Center(
-                  child: Text(
-                      "It seems you don' have any groups yet. Why don't you create one?"));
+                child: Text(
+                    "It seems you don' have any groups yet. Why don't you create one?"),
+              );
             }
             return ListView.builder(
               itemCount: db.groups.length,
@@ -50,8 +51,7 @@ class _GroupsPageState extends State<GroupsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.push(context,
-            MaterialPageRoute(builder: (context) => const CreateGroupPage())),
+        onPressed: () => Navigator.pushNamed(context, '/create_group'),
         tooltip: 'Add group',
         child: const Icon(Icons.add),
       ),
