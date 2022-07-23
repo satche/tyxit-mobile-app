@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/src/core/components/tyxit_logo.dart';
 import 'package:tyxit_mobile_app/src/core/constant/style/spacing.dart';
+import 'package:tyxit_mobile_app/src/features/groups/widget/chat_page.dart';
 import '../../app/data/database.dart';
 import 'create_group_page.dart';
 
@@ -42,7 +43,8 @@ class _GroupsPageState extends State<GroupsPage> {
                   child: ListTile(
                     leading: Image(image: group.picture),
                     title: Text(group.name.toString()),
-                    // onTap: () {},
+                    onTap: () => Navigator.pushNamed(context, "/groups",
+                        arguments: ChatPageArgs(group)),
                   ),
                 );
               },

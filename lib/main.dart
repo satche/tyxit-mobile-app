@@ -21,17 +21,15 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Tyxit Mobile App',
-        theme: TyxitThemes.mainTheme(),
-        /* Routing
+      title: 'Tyxit Mobile App',
+      theme: TyxitThemes.mainTheme(),
+      /* Routing
          ********************************/
-        routes: {
-          '/': (context) => const GroupsPage(),
-          '/create_group': (context) => const CreateGroupPage(),
-          '/groups': (context) => const ChatPage(),
-        },
-        onGenerateRoute: (settings) {
-          //
-        });
+      routes: {
+        '/': (context) => const GroupsPage(),
+        '/create_group': (context) => const CreateGroupPage(),
+        '/groups': (context) => ChatPage(),
+      },
+    );
   }
 }
