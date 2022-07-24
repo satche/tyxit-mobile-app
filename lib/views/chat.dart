@@ -28,6 +28,7 @@ class ChatView extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
+            tooltip: 'Settings',
             onPressed: () => Navigator.pushNamed(context, '/group_setting',
                 arguments: GroupSettingArgs(args.group)),
           ),
