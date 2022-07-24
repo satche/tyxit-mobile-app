@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/components/chat/message_list.dart';
-import '../components/avatar.dart';
-import '../components/chat/message.dart';
-import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../components/chat/chatbar.dart';
 import '../database/models/group.dart';
+import 'group_setting.dart';
 
 class ChatArgs {
   final Group group;
@@ -21,17 +19,19 @@ class ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ChatArgs;
 
-    void removeCurrentGroup() {
-      final db = Provider.of<Database>(context, listen: false);
-      db.removeGroup(args.group);
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: Text(args.group.name),
         leading: BackButton(
           onPressed: () => Navigator.pop(context),
         ),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () => Navigator.pushNamed(context, '/group_setting',
+                arguments: GroupSettingArgs(args.group)),
+          ),
+        ],
       ),
       body: Stack(
         children: <Widget>[

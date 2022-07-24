@@ -19,7 +19,7 @@ class Message extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         side: BorderSide(
           color: isMine ? ColorsBase.yellow : ColorsBase.grey,
-          width: 2,
+          width: 0.75,
         ),
       ),
       child: Padding(
