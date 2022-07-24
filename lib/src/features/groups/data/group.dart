@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tyxit_mobile_app/src/core/components/message.dart';
 
 class Group {
   final String name;

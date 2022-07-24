@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tyxit_mobile_app/src/core/components/chatbar.dart';
 import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
 
 class ChatPageArgs {
@@ -21,14 +22,19 @@ class ChatPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image(image: args.group.picture),
-            Text('Welcome to the group ${args.group.name}'),
-          ],
-        ),
+      body: Stack(
+        children: <Widget>[
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image(image: args.group.picture),
+                Text('Welcome to the group ${args.group.name}'),
+              ],
+            ),
+          ),
+          const Chatbar()
+        ],
       ),
     );
   }
