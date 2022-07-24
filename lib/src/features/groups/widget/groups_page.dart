@@ -17,13 +17,17 @@ class _GroupsPageState extends State<GroupsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const TyxitLogo(), actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.notifications),
-          tooltip: 'Show notifications',
-          onPressed: () {},
-        ),
-      ]),
+      appBar: AppBar(
+        title: const TyxitLogo(),
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.notifications),
+            tooltip: 'Show notifications',
+            onPressed: () {},
+          ),
+        ],
+      ),
       body: Container(
         padding: const EdgeInsets.symmetric(vertical: Spacing.medium),
         child: Consumer<Database>(

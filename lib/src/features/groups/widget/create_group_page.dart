@@ -20,7 +20,8 @@ class _CreateGroupPageState extends State<CreateGroupPage> {
     final db = Provider.of<Database>(context, listen: false);
     final group = Group(name: fieldController.text);
     db.addGroup(group);
-    Navigator.pushNamed(context, "/groups", arguments: ChatPageArgs(group));
+    Navigator.popAndPushNamed(context, "/groups",
+        arguments: ChatPageArgs(group));
   }
 
   @override
