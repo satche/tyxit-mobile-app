@@ -38,29 +38,7 @@ class ChatView extends StatelessWidget {
           Consumer<Database>(
             builder: (context, db, child) {
               return MessageList(args.group.messages);
-              // return ListView.builder(
-              //   itemCount: args.group.messages.length,
-              //   itemBuilder: (context, index) {
-              //     final message = args.group.messages[index];
-              //     return message;
-              //   },
-              // );
             },
-          ),
-          Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Avatar(url: args.group.picturePath),
-                Spacing.betweenFields,
-                Text('Welcome to the group ${args.group.name}'),
-                Spacing.betweenFields,
-                ElevatedButton(
-                  child: null,
-                  onPressed: () => removeCurrentGroup(),
-                ),
-              ],
-            ),
           ),
           Chatbar(group: args.group)
         ],

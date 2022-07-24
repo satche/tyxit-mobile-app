@@ -4,6 +4,8 @@ class Spacing {
   // Base
   static const double small = 10;
   static const double medium = 20;
+  static const double big = 40;
+  static const double huge = 60;
 
   /* Layouts
    ********************************/

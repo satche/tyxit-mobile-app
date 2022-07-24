@@ -15,17 +15,22 @@ class MessageList extends StatelessWidget {
         padding: Spacing.standardContainer,
         alignment: Alignment.center,
         child: const Text(
-          "It seems you don' have any groups yet. Why don't you create one?",
+          "There are no message yet.",
           textAlign: TextAlign.center,
         ),
       );
     }
-    return ListView.builder(
-      itemCount: messages.length,
-      itemBuilder: (context, index) {
-        final message = messages[index];
-        return message;
-      },
+    return Container(
+      padding: Spacing.standardContainer,
+      child: ListView.builder(
+        reverse: true,
+        padding: const EdgeInsets.only(bottom: Spacing.huge),
+        itemCount: messages.length,
+        itemBuilder: (context, index) {
+          final message = messages[index];
+          return message;
+        },
+      ),
     );
   }
 }

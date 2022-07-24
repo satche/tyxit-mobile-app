@@ -11,6 +11,6 @@ class Group extends ChangeNotifier {
   });
 
   void addMessage(Message message) {
-    messages.add(message);
+    messages.insert(0, message);
   }
 }
