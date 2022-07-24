@@ -28,6 +28,7 @@ class _ChatbarState extends State<Chatbar> {
     void sendMessage() {
       final db = Provider.of<Database>(context, listen: false);
       db.addMessageToGroup(widget.group, Message(fieldController.text));
+      fieldController.clear();
     }
 
     return Stack(
