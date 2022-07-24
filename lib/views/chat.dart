@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tyxit_mobile_app/src/core/components/chatbar.dart';
-import 'package:tyxit_mobile_app/src/features/app/data/database.dart';
-import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
+import '../database/database.dart';
+import '../components/chatbar.dart';
+import '../database/models/group.dart';
 
-class ChatPageArgs {
+class ChatArgs {
   final Group group;
 
-  ChatPageArgs(this.group);
+  ChatArgs(this.group);
 }
 
-class ChatPage extends StatelessWidget {
-  const ChatPage({Key? key}) : super(key: key);
+class ChatView extends StatelessWidget {
+  const ChatView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as ChatPageArgs;
+    final args = ModalRoute.of(context)!.settings.arguments as ChatArgs;
 
     void onPressed() {
       final db = Provider.of<Database>(context, listen: false);

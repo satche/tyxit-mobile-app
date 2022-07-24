@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
+
+import 'models/group.dart';
 
 class Database extends ChangeNotifier {
   final List<Group> groups = [];

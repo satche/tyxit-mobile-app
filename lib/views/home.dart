@@ -1,24 +1,24 @@
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
-import 'package:tyxit_mobile_app/src/core/components/tyxit_logo.dart';
-import 'package:tyxit_mobile_app/src/core/constant/style/spacing.dart';
-import 'package:tyxit_mobile_app/src/features/groups/widget/chat_page.dart';
-import '../../app/data/database.dart';
-import 'create_group_page.dart';
+import '../components/tyxit_logo.dart';
+import '../constants/spacing.dart';
+import '../database/database.dart';
+import 'chat.dart';
 
-class GroupsPage extends StatefulWidget {
-  const GroupsPage({Key? key}) : super(key: key);
+class HomeView extends StatefulWidget {
+  const HomeView({Key? key}) : super(key: key);
 
   @override
-  State<GroupsPage> createState() => _GroupsPageState();
+  State<HomeView> createState() => _HomeViewState();
 }
 
-class _GroupsPageState extends State<GroupsPage> {
+class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const TyxitLogo(),
+        centerTitle: false,
         automaticallyImplyLeading: false,
         actions: <Widget>[
           IconButton(
@@ -48,7 +48,7 @@ class _GroupsPageState extends State<GroupsPage> {
                     leading: Image(image: group.picture),
                     title: Text(group.name.toString()),
                     onTap: () => Navigator.pushNamed(context, "/groups",
-                        arguments: ChatPageArgs(group)),
+                        arguments: ChatArgs(group)),
                   ),
                 );
               },

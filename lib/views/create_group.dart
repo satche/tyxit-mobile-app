@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tyxit_mobile_app/src/features/app/data/database.dart';
-import 'package:tyxit_mobile_app/src/core/components/avatar.dart';
-import 'package:tyxit_mobile_app/src/core/constant/style/spacing.dart';
-import 'package:tyxit_mobile_app/src/features/groups/data/group.dart';
-import 'package:tyxit_mobile_app/src/features/groups/widget/chat_page.dart';
 
-class CreateGroupPage extends StatefulWidget {
-  const CreateGroupPage({Key? key}) : super(key: key);
+import '../components/avatar.dart';
+import '../constants/spacing.dart';
+import '../database/database.dart';
+import '../database/models/group.dart';
+import 'chat.dart';
+
+class CreateGroupView extends StatefulWidget {
+  const CreateGroupView({Key? key}) : super(key: key);
 
   @override
-  _CreateGroupPageState createState() => _CreateGroupPageState();
+  _CreateGroupViewState createState() => _CreateGroupViewState();
 }
 
-class _CreateGroupPageState extends State<CreateGroupPage> {
+class _CreateGroupViewState extends State<CreateGroupView> {
   final fieldController = TextEditingController();
 
   void onPressed() {
     final db = Provider.of<Database>(context, listen: false);
     final group = Group(name: fieldController.text);
     db.addGroup(group);
-    Navigator.popAndPushNamed(context, "/groups",
-        arguments: ChatPageArgs(group));
+    Navigator.popAndPushNamed(context, "/groups", arguments: ChatArgs(group));
   }
 
   @override

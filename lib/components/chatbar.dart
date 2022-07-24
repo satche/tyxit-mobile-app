@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tyxit_mobile_app/src/core/constant/style/spacing.dart';
+import '../constants/spacing.dart';
 
 class Chatbar extends StatefulWidget {
   const Chatbar({Key? key}) : super(key: key);

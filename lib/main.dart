@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tyxit_mobile_app/src/features/app/data/database.dart';
-import 'package:tyxit_mobile_app/src/core/constant/style/themes.dart';
-import 'package:tyxit_mobile_app/src/features/groups/widget/chat_page.dart';
-import 'package:tyxit_mobile_app/src/features/groups/widget/create_group_page.dart';
-import 'package:tyxit_mobile_app/src/features/groups/widget/groups_page.dart';
+import 'database/database.dart';
+
+import 'constants/themes.dart';
+import 'views/chat.dart';
+import 'views/create_group.dart';
+import 'views/home.dart';
 
 void main() {
   runApp(
@@ -26,9 +27,9 @@ class MainApp extends StatelessWidget {
       /* Routing
          ********************************/
       routes: {
-        '/': (context) => const GroupsPage(),
-        '/create_group': (context) => const CreateGroupPage(),
-        '/groups': (context) => ChatPage(),
+        '/': (context) => const HomeView(),
+        '/create_group': (context) => const CreateGroupView(),
+        '/groups': (context) => ChatView(),
       },
     );
   }
