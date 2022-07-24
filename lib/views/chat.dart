@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../constants/spacing.dart';
 import '../database/database.dart';
-import '../components/chatbar.dart';
+import '../components/chat/chatbar.dart';
 import '../database/models/group.dart';
 
 class ChatArgs {
@@ -17,7 +18,7 @@ class ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ChatArgs;
 
-    void onPressed() {
+    void removeCurrentGroup() {
       final db = Provider.of<Database>(context, listen: false);
       final group = args.group;
       db.removeGroup(group);
@@ -37,10 +38,12 @@ class ChatView extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Image(image: args.group.picture),
+                Spacing.betweenFields,
                 Text('Welcome to the group ${args.group.name}'),
+                Spacing.betweenFields,
                 ElevatedButton(
                   child: null,
-                  onPressed: () => onPressed(),
+                  onPressed: () => removeCurrentGroup(),
                 ),
               ],
             ),

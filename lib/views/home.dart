@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
+import '../components/group_list.dart';
 import '../components/tyxit_logo.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
-import 'chat.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({Key? key}) : super(key: key);
@@ -29,30 +29,10 @@ class _HomeViewState extends State<HomeView> {
         ],
       ),
       body: Container(
-        padding: const EdgeInsets.symmetric(vertical: Spacing.medium),
+        padding: Spacing.fullWidthContainer,
         child: Consumer<Database>(
           builder: (context, db, child) {
-            if (db.groups.isEmpty) {
-              return const Center(
-                child: Text(
-                    "It seems you don' have any groups yet. Why don't you create one?"),
-              );
-            }
-            return ListView.builder(
-              itemCount: db.groups.length,
-              itemBuilder: (context, index) {
-                final group = db.groups[index];
-                return Card(
-                  margin: const EdgeInsets.symmetric(vertical: Spacing.medium),
-                  child: ListTile(
-                    leading: Image(image: group.picture),
-                    title: Text(group.name.toString()),
-                    onTap: () => Navigator.pushNamed(context, "/groups",
-                        arguments: ChatArgs(group)),
-                  ),
-                );
-              },
-            );
+            return GroupList(db.groups);
           },
         ),
       ),

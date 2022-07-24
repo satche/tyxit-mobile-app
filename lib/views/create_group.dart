@@ -37,22 +37,27 @@ class _CreateGroupViewState extends State<CreateGroupView> {
         title: const Text('Create Group'),
       ),
       body: Container(
-        padding: Spacing.container,
+        padding: Spacing.standardContainer,
         child: Column(
           children: <Widget>[
             Avatar(url: 'assets/images/group_picture/default.png'),
+            Spacing.betweenFields,
             TextField(
               controller: fieldController,
               decoration: const InputDecoration(
                 labelText: 'Group Name',
               ),
             ),
-            ElevatedButton(
-              onPressed: () => onPressed(),
-              child: const Text("Create Group"),
-            ),
+            // ElevatedButton(
+            //   onPressed: () => onPressed(),
+            //   child: const Text("Create Group"),
+            // ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        label: const Text('Create Group'),
+        onPressed: () => onPressed(),
       ),
     );
   }
