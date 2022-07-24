@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class Group {
   final String name;
-  late final AssetImage picture;
+  late final String picturePath;
 
   Group({
     required this.name,
-    this.picture = const AssetImage('assets/images/group_picture/default.png'),
+    this.picturePath = "assets/images/group_picture/default.png",
   });
 }

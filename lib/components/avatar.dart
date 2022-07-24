@@ -4,16 +4,13 @@ class Avatar extends StatelessWidget {
   final String url;
   final double size;
 
-  Avatar({required this.url, this.size = 60});
+  const Avatar({Key? key, required this.url, this.size = 40}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: CircleAvatar(
-        backgroundImage: AssetImage(url),
-        radius: size,
-      ),
+    return CircleAvatar(
+      backgroundImage: AssetImage(url),
+      maxRadius: size,
     );
   }
 }

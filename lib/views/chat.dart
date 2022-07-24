@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../components/avatar.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../components/chat/chatbar.dart';
@@ -37,7 +38,7 @@ class ChatView extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Image(image: args.group.picture),
+                Avatar(url: args.group.picturePath),
                 Spacing.betweenFields,
                 Text('Welcome to the group ${args.group.name}'),
                 Spacing.betweenFields,
