@@ -17,7 +17,7 @@ class CreateGroupView extends StatefulWidget {
 class _CreateGroupViewState extends State<CreateGroupView> {
   final fieldController = TextEditingController();
 
-  void onPressed() {
+  void createAndGotoGroup() {
     final db = Provider.of<Database>(context, listen: false);
     final group = Group(name: fieldController.text);
     db.addGroup(group);
@@ -40,7 +40,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
         padding: Spacing.standardContainer,
         child: Column(
           children: <Widget>[
-            Avatar(url: 'assets/images/group_picture/default.png'),
+            const Avatar(url: 'assets/images/group_picture/default.png'),
             Spacing.betweenFields,
             TextField(
               controller: fieldController,
@@ -48,16 +48,12 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                 labelText: 'Group Name',
               ),
             ),
-            // ElevatedButton(
-            //   onPressed: () => onPressed(),
-            //   child: const Text("Create Group"),
-            // ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         label: const Text('Create Group'),
-        onPressed: () => onPressed(),
+        onPressed: () => createAndGotoGroup(),
       ),
     );
   }

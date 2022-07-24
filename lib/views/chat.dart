@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tyxit_mobile_app/components/chat/message_list.dart';
 import '../components/avatar.dart';
+import '../components/chat/message.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../components/chat/chatbar.dart';
@@ -21,8 +23,7 @@ class ChatView extends StatelessWidget {
 
     void removeCurrentGroup() {
       final db = Provider.of<Database>(context, listen: false);
-      final group = args.group;
-      db.removeGroup(group);
+      db.removeGroup(args.group);
     }
 
     return Scaffold(
@@ -34,6 +35,18 @@ class ChatView extends StatelessWidget {
       ),
       body: Stack(
         children: <Widget>[
+          Consumer<Database>(
+            builder: (context, db, child) {
+              return MessageList(args.group.messages);
+              // return ListView.builder(
+              //   itemCount: args.group.messages.length,
+              //   itemBuilder: (context, index) {
+              //     final message = args.group.messages[index];
+              //     return message;
+              //   },
+              // );
+            },
+          ),
           Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -49,7 +62,7 @@ class ChatView extends StatelessWidget {
               ],
             ),
           ),
-          const Chatbar()
+          Chatbar(group: args.group)
         ],
       ),
     );
