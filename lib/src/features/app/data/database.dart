@@ -8,4 +8,9 @@ class Database extends ChangeNotifier {
     groups.add(group);
     notifyListeners();
   }
+
+  removeGroup(Group group) {
+    groups.remove(group);
+    notifyListeners();
+  }
 }
