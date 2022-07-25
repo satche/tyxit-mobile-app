@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/components/avatar.dart';
 import 'package:tyxit_mobile_app/constants/colors.dart';
 
+import '../components/setting.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../database/models/group.dart';
@@ -26,32 +27,17 @@ class GroupSetting extends StatelessWidget {
       Navigator.popAndPushNamed(context, '/');
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Group settings'),
-      ),
-      body: Container(
-        padding: Spacing.fullWidthContainer,
-        alignment: Alignment.center,
-        child: Column(
-          children: <Widget>[
-            Avatar(url: args.group.picturePath),
-            Spacing.betweenFields,
-            Text(args.group.name),
-            const SizedBox(height: Spacing.big),
-            ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                ListTile(
-                  title: const Text('Remove group'),
-                  onTap: () => removeCurrentGroup(),
-                  textColor: ColorsBase.red,
-                ),
-              ],
-            ),
-          ],
+    final Setting setting = Setting(
+      entity: args.group,
+      child: <Widget>[
+        ListTile(
+          title: const Text('Delete account'),
+          onTap: () => removeCurrentGroup(),
+          textColor: ColorsBase.red,
         ),
-      ),
+      ],
     );
+
+    return setting;
   }
 }

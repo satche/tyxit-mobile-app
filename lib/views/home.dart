@@ -22,7 +22,7 @@ class HomeView extends StatelessWidget {
           if (user != null)
             IconButton(
               onPressed: () => Navigator.pushNamed(context, '/user_setting',
-                  arguments: UserSettingArgs(user)),
+                  arguments: UserArgs(user)),
               tooltip: "Settings",
               iconSize: 40,
               icon: Image(
