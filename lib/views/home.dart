@@ -4,23 +4,31 @@ import '../components/group_list.dart';
 import '../components/tyxit_logo.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
+import 'user_setting.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final db = Provider.of<Database>(context, listen: false);
+    final user = db.loggedUser;
     return Scaffold(
       appBar: AppBar(
         title: const TyxitLogo(),
         centerTitle: false,
         automaticallyImplyLeading: false,
         actions: <Widget>[
-          IconButton(
-            icon: const Icon(Icons.notifications),
-            tooltip: 'Show notifications',
-            onPressed: () {},
-          ),
+          if (user != null)
+            IconButton(
+              onPressed: () => Navigator.pushNamed(context, '/user_setting',
+                  arguments: UserSettingArgs(user)),
+              tooltip: "Settings",
+              iconSize: 40,
+              icon: Image(
+                image: AssetImage(user.picturePath),
+              ),
+            )
         ],
       ),
       body: Container(

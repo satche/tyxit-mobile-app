@@ -5,24 +5,24 @@ import 'package:tyxit_mobile_app/constants/colors.dart';
 
 import '../constants/spacing.dart';
 import '../database/database.dart';
-import '../database/models/group.dart';
+import '../database/models/user.dart';
 
-class GroupSettingArgs {
-  final Group group;
+class UserSettingArgs {
+  final User user;
 
-  GroupSettingArgs(this.group);
+  UserSettingArgs(this.user);
 }
 
-class GroupSetting extends StatelessWidget {
-  const GroupSetting({Key? key}) : super(key: key);
+class UserSetting extends StatelessWidget {
+  const UserSetting({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as GroupSettingArgs;
+    final args = ModalRoute.of(context)!.settings.arguments as UserSettingArgs;
 
-    void removeCurrentGroup() {
+    void removeCurrentUser() {
       final db = Provider.of<Database>(context, listen: false);
-      db.removeGroup(args.group);
+      db.removeUser(args.user);
       Navigator.popAndPushNamed(context, '/');
     }
 
@@ -35,16 +35,16 @@ class GroupSetting extends StatelessWidget {
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
-            Avatar(url: args.group.picturePath),
+            Avatar(url: args.user.picturePath),
             Spacing.betweenFields,
-            Text(args.group.name),
+            Text(args.user.name),
             const SizedBox(height: Spacing.big),
             ListView(
               shrinkWrap: true,
               children: <Widget>[
                 ListTile(
-                  title: const Text('Remove group'),
-                  onTap: () => removeCurrentGroup(),
+                  title: const Text('Delete account'),
+                  onTap: () => removeCurrentUser(),
                   textColor: ColorsBase.red,
                 ),
               ],
