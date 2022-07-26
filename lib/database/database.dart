@@ -8,6 +8,14 @@ class Database extends ChangeNotifier {
   final List<User> users = [];
   User? loggedUser;
 
+  Database() {
+    final User user1 = User(name: 'John Doe');
+    final Group group1 = Group(name: 'Blue Banana');
+    addUser(user1);
+    addGroup(group1);
+    loginUser(user1);
+  }
+
   /* Groups
   ********************************/
   void addGroup(Group group) {
@@ -35,6 +43,7 @@ class Database extends ChangeNotifier {
   ********************************/
   void addUser(User user) {
     users.add(user);
+    notifyListeners();
   }
 
   void removeUser(User user) {
@@ -52,9 +61,11 @@ class Database extends ChangeNotifier {
   void loginUser(User user) {
     logoutUser();
     loggedUser = user;
+    notifyListeners();
   }
 
   logoutUser() {
     loggedUser = null;
+    notifyListeners();
   }
 }

@@ -4,6 +4,7 @@ import 'package:tyxit_mobile_app/views/group_setting.dart';
 import 'database/database.dart';
 
 import 'constants/themes.dart';
+import 'database/models/group.dart';
 import 'database/models/user.dart';
 import 'views/chat.dart';
 import 'views/create_group.dart';
@@ -20,18 +21,10 @@ void main() {
 }
 
 class MainApp extends StatelessWidget {
-  MainApp({Key? key}) : super(key: key);
-
-  void initDatabase(context) {
-    final db = Provider.of<Database>(context, listen: false);
-    final user = User(name: 'John Doe');
-    db.addUser(user);
-    db.loginUser(user);
-  }
+  const MainApp({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    initDatabase(context);
     return MaterialApp(
       title: 'Tyxit Mobile App',
       theme: TyxitThemes.mainTheme(),
