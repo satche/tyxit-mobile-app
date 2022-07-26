@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tyxit_mobile_app/components/avatar.dart';
 import 'package:tyxit_mobile_app/constants/colors.dart';
 
 import '../components/setting.dart';
-import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../database/models/group.dart';
 
@@ -31,7 +29,7 @@ class GroupSetting extends StatelessWidget {
       entity: args.group,
       child: <Widget>[
         ListTile(
-          title: const Text('Delete account'),
+          title: const Text('Delete group'),
           onTap: () => removeCurrentGroup(),
           textColor: ColorsBase.red,
         ),

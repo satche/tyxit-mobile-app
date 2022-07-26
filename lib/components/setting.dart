@@ -2,33 +2,66 @@ import 'package:flutter/material.dart';
 import 'package:tyxit_mobile_app/components/avatar.dart';
 import '../constants/spacing.dart';
 
-class Setting extends StatelessWidget {
+class Setting extends StatefulWidget {
   final List<Widget>? child;
   final dynamic entity; // User or Group
-  const Setting({Key? key, this.entity, this.child}) : super(key: key);
+  Setting({Key? key, this.entity, this.child}) : super(key: key);
+
+  @override
+  _SettingState createState() => _SettingState();
+}
+
+class _SettingState extends State<Setting> {
+  final fieldController = TextEditingController();
+
+  List<Widget> settingsList(widgetList) {
+    return widgetList;
+  }
+
+  void changeName(BuildContext context, newName) {
+    widget.entity.changeName(context, widget.entity, newName);
+  }
+
+  @override
+  void dispose() {
+    fieldController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    List<Widget> settingsList(widgetList) {
-      return widgetList;
-    }
-
     return Scaffold(
       appBar: AppBar(
-        title: Text('${entity.runtimeType} settings'),
+        leading: BackButton(
+          onPressed: () => {Navigator.pop(context)},
+        ),
+        title: Text('${widget.entity.runtimeType} settings'),
       ),
       body: Container(
         padding: Spacing.fullWidthContainer,
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
-            Avatar(url: entity.picturePath),
+            Avatar(url: widget.entity.picturePath),
             Spacing.betweenFields,
-            Text(entity.name),
+            SizedBox(
+              width: 250,
+              child: TextField(
+                controller: fieldController..text = widget.entity.name,
+                onEditingComplete: () =>
+                    changeName(context, fieldController.text),
+                textAlign: TextAlign.center,
+                decoration: const InputDecoration(
+                  border: InputBorder.none,
+                  prefixIcon: SizedBox(width: 0),
+                  suffixIcon: Icon(Icons.edit),
+                ),
+              ),
+            ),
             const SizedBox(height: Spacing.big),
             ListView(
               shrinkWrap: true,
-              children: settingsList(child),
+              children: settingsList(widget.child),
             ),
           ],
         ),

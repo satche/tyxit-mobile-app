@@ -21,10 +21,9 @@ class ChatView extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(args.group.name),
-        leading: BackButton(
-          onPressed: () => Navigator.pop(context),
-        ),
+        title: Consumer<Database>(builder: (context, db, child) {
+          return Text(args.group.name);
+        }),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),

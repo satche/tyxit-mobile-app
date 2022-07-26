@@ -10,34 +10,46 @@ class Database extends ChangeNotifier {
 
   /* Groups
   ********************************/
-  addGroup(Group group) {
+  void addGroup(Group group) {
     groups.add(group);
     notifyListeners();
   }
 
-  removeGroup(Group group) {
+  void removeGroup(Group group) {
     groups.remove(group);
     notifyListeners();
   }
 
-  addMessageToGroup(Group group, Message message) {
+  void editGroupName(Group group, String newName) {
+    var groupIndex = groups.indexOf(group);
+    groups[groupIndex].name = newName;
+    notifyListeners();
+  }
+
+  void addMessageToGroup(Group group, Message message) {
     group.addMessage(message);
     notifyListeners();
   }
 
   /* Users
   ********************************/
-  addUser(User user) {
+  void addUser(User user) {
     users.add(user);
   }
 
-  removeUser(User user) {
+  void removeUser(User user) {
     logoutUser();
     users.remove(user);
     notifyListeners();
   }
 
-  loginUser(User user) {
+  void editUserName(User user, String newName) {
+    var userIndex = users.indexOf(user);
+    users[userIndex].name = newName;
+    notifyListeners();
+  }
+
+  void loginUser(User user) {
     logoutUser();
     loggedUser = user;
   }

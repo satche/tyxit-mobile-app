@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tyxit_mobile_app/components/avatar.dart';
 import 'package:tyxit_mobile_app/components/setting.dart';
 import 'package:tyxit_mobile_app/constants/colors.dart';
-
-import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../database/models/user.dart';
 
