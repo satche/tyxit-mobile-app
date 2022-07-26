@@ -1,11 +1,9 @@
 import "package:flutter/material.dart";
-import 'package:flutter/scheduler.dart';
 import 'package:provider/provider.dart';
 import '../components/group_list.dart';
 import '../components/tyxit_logo.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
-import '../database/models/group.dart';
 import '../database/models/user.dart';
 import 'user_setting.dart';
 
@@ -15,7 +13,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final db = Provider.of<Database>(context, listen: false);
-    User user = db.loggedUser!;
+    User? user = db.loggedUser;
 
     return Scaffold(
       appBar: AppBar(

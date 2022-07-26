@@ -45,6 +45,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
             TextField(
               controller: fieldController,
               decoration: const InputDecoration(
+                border: OutlineInputBorder(),
                 labelText: 'Group Name',
               ),
             ),

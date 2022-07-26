@@ -6,7 +6,7 @@ import '../database/database.dart';
 import '../database/models/user.dart';
 
 class UserArgs {
-  final User user; // User or Group
+  final User user;
 
   UserArgs(this.user);
 }
@@ -17,16 +17,26 @@ class UserSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as UserArgs;
+    final db = Provider.of<Database>(context, listen: false);
 
     void removeCurrentUser() {
-      final db = Provider.of<Database>(context, listen: false);
       db.removeUser(args.user);
       Navigator.popAndPushNamed(context, '/');
+    }
+
+    void logout() {
+      db.logoutUser();
+      Navigator.popAndPushNamed(context, '/login');
     }
 
     final Setting setting = Setting(
       entity: args.user,
       child: <Widget>[
+        ListTile(
+          title: const Text('Logout'),
+          onTap: () => logout(),
+          textColor: ColorsBase.red,
+        ),
         ListTile(
           title: const Text('Delete account'),
           onTap: () => removeCurrentUser(),

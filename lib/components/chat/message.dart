@@ -43,7 +43,7 @@ class Message extends StatelessWidget {
                   fontSize: 12,
                   color: author == db.loggedUser
                       ? ColorsBase.yellow
-                      : ColorsBase.grey,
+                      : ColorsBase.black,
                 ),
               ),
               const SizedBox(height: Spacing.tiny),
