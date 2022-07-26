@@ -6,7 +6,7 @@ import 'models/group.dart';
 class Database extends ChangeNotifier {
   final List<Group> groups = [];
   final List<User> users = [];
-  User? loggedUser;
+  late User? loggedUser;
 
   Database() {
     final User user1 = User(name: 'John Doe');

@@ -27,7 +27,8 @@ class _ChatbarState extends State<Chatbar> {
   Widget build(BuildContext context) {
     void sendMessage() {
       final db = Provider.of<Database>(context, listen: false);
-      db.addMessageToGroup(widget.group, Message(text: fieldController.text));
+      db.addMessageToGroup(widget.group,
+          Message(text: fieldController.text, author: db.loggedUser!));
       fieldController.clear();
     }
 

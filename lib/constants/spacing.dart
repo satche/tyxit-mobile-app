@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class Spacing {
   // Base
+  static const double tiny = 6;
   static const double small = 10;
   static const double medium = 20;
   static const double big = 40;
@@ -16,6 +17,13 @@ class Spacing {
   static const EdgeInsets fullWidthContainer = EdgeInsets.symmetric(
     horizontal: 0,
     vertical: medium,
+  );
+
+  static const EdgeInsets message = EdgeInsets.only(
+    top: small,
+    left: medium,
+    right: medium,
+    bottom: medium,
   );
 
   // Fields

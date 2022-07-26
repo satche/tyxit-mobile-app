@@ -4,8 +4,6 @@ import 'package:tyxit_mobile_app/views/group_setting.dart';
 import 'database/database.dart';
 
 import 'constants/themes.dart';
-import 'database/models/group.dart';
-import 'database/models/user.dart';
 import 'views/chat.dart';
 import 'views/create_group.dart';
 import 'views/home.dart';
