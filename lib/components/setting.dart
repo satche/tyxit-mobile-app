@@ -46,7 +46,7 @@ class _SettingState extends State<Setting> {
             Spacing.betweenFields,
             SizedBox(
               width: 250,
-              child: TextField(
+              child: TextFormField(
                 controller: fieldController..text = widget.entity.name,
                 onEditingComplete: () =>
                     changeName(context, fieldController.text),

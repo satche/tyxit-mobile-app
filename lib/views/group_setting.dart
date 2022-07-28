@@ -25,12 +25,32 @@ class GroupSetting extends StatelessWidget {
       Navigator.popAndPushNamed(context, '/');
     }
 
+    Widget confirmationDialog() {
+      return AlertDialog(
+        title: const Text('Delete group'),
+        content: const Text('Are you sure you want to delete this group?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text('Delete'),
+            onPressed: () => removeCurrentGroup(),
+          ),
+        ],
+      );
+    }
+
     final Setting setting = Setting(
       entity: args.group,
       child: <Widget>[
         ListTile(
           title: const Text('Delete group'),
-          onTap: () => removeCurrentGroup(),
+          onTap: () => showDialog(
+            context: context,
+            builder: (context) => confirmationDialog(),
+          ),
           textColor: ColorsBase.red,
         ),
       ],

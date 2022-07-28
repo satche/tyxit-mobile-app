@@ -21,7 +21,7 @@ class UserSetting extends StatelessWidget {
 
     void removeCurrentUser() {
       db.removeUser(args.user);
-      Navigator.popAndPushNamed(context, '/');
+      Navigator.popAndPushNamed(context, '/login');
     }
 
     void logout() {
@@ -29,17 +29,59 @@ class UserSetting extends StatelessWidget {
       Navigator.popAndPushNamed(context, '/login');
     }
 
+    Widget logoutDialog() {
+      return AlertDialog(
+        title: const Text('Logout'),
+        content:
+            const Text('You\'re about to log out. Do you want to continue?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text('Logout'),
+            onPressed: () => logout(),
+          ),
+        ],
+      );
+    }
+
+    Widget deleteAccountDialog() {
+      return AlertDialog(
+        title: const Text('Delete account'),
+        content: const Text(
+            'You\'re about to delete your account. Do you want to continue?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text('Delete account'),
+            onPressed: () => removeCurrentUser(),
+          ),
+        ],
+      );
+    }
+
     final Setting setting = Setting(
       entity: args.user,
       child: <Widget>[
         ListTile(
           title: const Text('Logout'),
-          onTap: () => logout(),
+          onTap: () => showDialog(
+            context: context,
+            builder: (context) => logoutDialog(),
+          ),
           textColor: ColorsBase.red,
         ),
         ListTile(
           title: const Text('Delete account'),
-          onTap: () => removeCurrentUser(),
+          onTap: () => showDialog(
+            context: context,
+            builder: (context) => deleteAccountDialog(),
+          ),
           textColor: ColorsBase.red,
         ),
       ],
