@@ -16,6 +16,7 @@ class Chatbar extends StatefulWidget {
 
 class _ChatbarState extends State<Chatbar> {
   final fieldController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
 
   @override
   void dispose() {
@@ -32,40 +33,39 @@ class _ChatbarState extends State<Chatbar> {
       fieldController.clear();
     }
 
-    return Stack(
-      children: <Widget>[
-        Align(
-          alignment: Alignment.bottomLeft,
-          child: Container(
-            padding: Spacing.standardContainer,
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                  child: TextField(
-                    controller: fieldController,
-                    decoration: const InputDecoration(
-                      contentPadding: Spacing.standardContainer,
-                      hintText: "Type a message",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(50)),
-                      ),
+    return Form(
+      key: _formKey,
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: Container(
+          padding: Spacing.standardContainer,
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                child: TextFormField(
+                  controller: fieldController,
+                  decoration: const InputDecoration(
+                    contentPadding: Spacing.standardContainer,
+                    hintText: "Type a message",
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(50)),
                     ),
                   ),
                 ),
-                const SizedBox(width: Spacing.small),
-                FloatingActionButton(
-                  onPressed: () => sendMessage(),
-                  tooltip: "Send",
-                  elevation: 0,
-                  child: const Icon(
-                    Icons.send,
-                  ),
+              ),
+              const SizedBox(width: Spacing.small),
+              FloatingActionButton(
+                onPressed: () => sendMessage(),
+                tooltip: "Send",
+                elevation: 0,
+                child: const Icon(
+                  Icons.send,
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
-      ],
+      ),
     );
   }
 }
