@@ -21,12 +21,13 @@ class Message extends StatelessWidget {
     return SizedBox(
       width: 10,
       child: Card(
-        color: ColorsBase.grey,
+        color: ColorsBase.greyDark,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: BorderSide(
-            color:
-                author == db.loggedUser ? ColorsBase.yellow : ColorsBase.grey,
+            color: author == db.loggedUser
+                ? ColorsBase.yellow
+                : ColorsBase.greyLight,
             width: 0.75,
           ),
         ),
@@ -43,7 +44,7 @@ class Message extends StatelessWidget {
                   fontSize: 12,
                   color: author == db.loggedUser
                       ? ColorsBase.yellow
-                      : ColorsBase.black,
+                      : ColorsBase.greyLight,
                 ),
               ),
               const SizedBox(height: Spacing.tiny),

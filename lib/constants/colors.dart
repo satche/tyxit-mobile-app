@@ -7,5 +7,6 @@ class ColorsBase {
   static const black = Color(0xff020202);
   static const greyDark = Color(0xff0B0D10);
   static const grey = Color(0xFF323538);
+  static const greyLight = Color(0xFF5A5E61);
   static const white = Color(0xffFCFCFC);
 }

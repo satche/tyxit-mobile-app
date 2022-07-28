@@ -23,7 +23,7 @@ class Spacing {
     top: small,
     left: medium,
     right: medium,
-    bottom: medium,
+    bottom: 15,
   );
 
   // Fields
