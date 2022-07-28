@@ -12,14 +12,16 @@ class Database extends ChangeNotifier {
     final User user1 = User(name: 'John Doe');
     final Group group1 = Group(name: 'Blue Banana');
     addUser(user1);
-    addGroup(group1);
+    addGroup(group: group1, admin: user1);
     loginUser(user1);
   }
 
   /* Groups
   ********************************/
-  void addGroup(Group group) {
+  void addGroup({required Group group, required User admin}) {
     groups.add(group);
+    group.users.add(admin);
+    group.setAdmin(admin);
     notifyListeners();
   }
 

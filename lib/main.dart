@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/views/group_setting.dart';
 import 'package:tyxit_mobile_app/views/login.dart';
+import 'package:tyxit_mobile_app/views/members_management.dart';
 import 'database/database.dart';
 
 import 'constants/themes.dart';
@@ -34,6 +35,7 @@ class MainApp extends StatelessWidget {
         '/groups': (context) => const ChatView(),
         '/group_setting': (context) => const GroupSetting(),
         '/user_setting': (context) => const UserSetting(),
+        '/members_management': (context) => const MembersManagement(),
       },
     );
   }

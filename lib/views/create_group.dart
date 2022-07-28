@@ -20,7 +20,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
   void createAndGotoGroup() {
     final db = Provider.of<Database>(context, listen: false);
     final group = Group(name: fieldController.text);
-    db.addGroup(group);
+    db.addGroup(group: group, admin: db.loggedUser!);
     Navigator.popAndPushNamed(context, "/groups", arguments: ChatArgs(group));
   }
 

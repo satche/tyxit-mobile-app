@@ -15,7 +15,7 @@ class GroupList extends StatelessWidget {
         padding: Spacing.standardContainer,
         alignment: Alignment.center,
         child: const Text(
-          "It seems you don' have any groups yet. Why don't you create one?",
+          "It seems you don't have any groups yet. Why don't you create one?",
           textAlign: TextAlign.center,
         ),
       );
