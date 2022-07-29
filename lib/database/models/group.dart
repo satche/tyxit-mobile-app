@@ -18,11 +18,16 @@ class Group extends ChangeNotifier {
   }
 
   void changeName(context, dynamic group, String newName) {
-    Provider.of<Database>(context, listen: false).editGroupName(group, newName);
+    name = newName;
+    Provider.of<Database>(context, listen: false).hasUpdateded();
   }
 
   void addUser(User user) {
     users.add(user);
+  }
+
+  void removeUser(User user) {
+    users.remove(user);
   }
 
   void setAdmin(User user) {

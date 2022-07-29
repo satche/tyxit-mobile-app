@@ -12,12 +12,10 @@ import 'views/home.dart';
 import 'views/user_setting.dart';
 
 void main() {
-  runApp(
-    ChangeNotifierProvider(
-      create: (context) => Database(),
-      child: MainApp(),
-    ),
-  );
+  runApp(ChangeNotifierProvider(
+    create: (context) => Database(),
+    child: const MainApp(),
+  ));
 }
 
 class MainApp extends StatelessWidget {

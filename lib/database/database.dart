@@ -16,6 +16,10 @@ class Database extends ChangeNotifier {
     loginUser(user1);
   }
 
+  void hasUpdateded() {
+    notifyListeners();
+  }
+
   /* Groups
   ********************************/
   void addGroup({required Group group, required User admin}) {
@@ -27,12 +31,6 @@ class Database extends ChangeNotifier {
 
   void removeGroup(Group group) {
     groups.remove(group);
-    notifyListeners();
-  }
-
-  void editGroupName(Group group, String newName) {
-    var groupIndex = groups.indexOf(group);
-    groups[groupIndex].name = newName;
     notifyListeners();
   }
 
@@ -51,12 +49,6 @@ class Database extends ChangeNotifier {
   void removeUser(User user) {
     logoutUser();
     users.remove(user);
-    notifyListeners();
-  }
-
-  void editUserName(User user, String newName) {
-    var userIndex = users.indexOf(user);
-    users[userIndex].name = newName;
     notifyListeners();
   }
 

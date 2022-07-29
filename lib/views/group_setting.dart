@@ -48,7 +48,7 @@ class GroupSetting extends StatelessWidget {
         ListTile(
           title: const Text('Manage members'),
           onTap: () => Navigator.pushNamed(context, "/members_management",
-              arguments: args.group.users),
+              arguments: args.group),
         ),
         ListTile(
           title: const Text('Delete group'),

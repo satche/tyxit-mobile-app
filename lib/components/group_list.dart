@@ -20,24 +20,21 @@ class GroupList extends StatelessWidget {
         ),
       );
     }
-    return ListView.builder(
+    return ListView.separated(
       itemCount: groups.length,
       itemBuilder: (context, index) {
         final group = groups[index];
         return Card(
           child: ListTile(
-            contentPadding: const EdgeInsets.only(
-              left: Spacing.small,
-              right: Spacing.small,
-              top: 0,
-              bottom: Spacing.small,
-            ),
             leading: Image(image: AssetImage(group.picturePath)),
             title: Text(group.name),
             onTap: () => Navigator.pushNamed(context, "/groups",
                 arguments: ChatArgs(group)),
           ),
         );
+      },
+      separatorBuilder: (BuildContext context, int index) {
+        return const Divider();
       },
     );
   }

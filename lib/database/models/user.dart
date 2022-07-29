@@ -12,6 +12,7 @@ class User extends ChangeNotifier {
   });
 
   void changeName(context, dynamic user, String newName) {
-    Provider.of<Database>(context, listen: false).editUserName(user, newName);
+    name = newName;
+    Provider.of<Database>(context, listen: false).hasUpdateded();
   }
 }

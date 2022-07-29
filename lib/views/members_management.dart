@@ -1,26 +1,19 @@
 import 'package:flutter/material.dart';
-
-import '../database/models/user.dart';
+import '../components/member_list.dart';
+import '../database/models/group.dart';
 
 class MembersManagement extends StatelessWidget {
   const MembersManagement({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final users = ModalRoute.of(context)!.settings.arguments as List<User>;
+    final group = ModalRoute.of(context)!.settings.arguments as Group;
 
     return Scaffold(
       appBar: AppBar(
         title: const Text('Group members'),
       ),
-      body: ListView.builder(
-        itemCount: users.length,
-        itemBuilder: (context, index) {
-          return ListTile(
-            title: Text(users[index].name),
-          );
-        },
-      ),
+      body: MemberList(group),
     );
   }
 }
