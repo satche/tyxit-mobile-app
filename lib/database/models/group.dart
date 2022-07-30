@@ -8,6 +8,7 @@ class Group extends ChangeNotifier {
   String name;
   late final String picturePath = "assets/images/group_picture/default.png";
   final List<Message> messages = [];
+  final List<User> pendingUsers = [];
   final List<User> users = [];
   User? admin;
 
@@ -23,7 +24,16 @@ class Group extends ChangeNotifier {
   }
 
   void addUser(User user) {
+    pendingUsers.add(user);
+  }
+
+  void confirmUser(User user) {
+    pendingUsers.remove(user);
     users.add(user);
+  }
+
+  void denyUser(User user) {
+    pendingUsers.remove(user);
   }
 
   void removeUser(User user) {
