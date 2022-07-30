@@ -9,10 +9,19 @@ class Database extends ChangeNotifier {
   late User? loggedUser;
 
   Database() {
-    final User user1 = User(name: 'John Doe');
+    final User user1 = User(name: 'Thomas');
+    final User user2 = User(name: 'Simon');
+    final User user3 = User(name: 'Raphael');
+
     final Group group1 = Group(name: 'Blue Banana');
     addUser(user1);
+    addUser(user2);
+    addUser(user3);
+
     addGroup(group: group1, admin: user1);
+    group1.addUser(user2);
+    group1.addUser(user3);
+
     loginUser(user1);
   }
 

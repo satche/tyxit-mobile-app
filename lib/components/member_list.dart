@@ -25,6 +25,8 @@ class _MemberListState extends State<MemberList> {
 
   @override
   Widget build(BuildContext context) {
+    final db = Provider.of<Database>(context, listen: false);
+
     Widget removeMemberDialog(User user) {
       return AlertDialog(
         title: const Text('Remove member'),
@@ -42,6 +44,47 @@ class _MemberListState extends State<MemberList> {
       );
     }
 
+    Widget leaveGroupDialog(User user) {
+      return AlertDialog(
+        title: const Text('Leave group'),
+        content: const Text('Are you sure you want to leave this group?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text('Leave'),
+            onPressed: () => {},
+          ),
+        ],
+      );
+    }
+
+    Widget removeIcon(User user) {
+      return IconButton(
+        icon: const Icon(
+          Icons.delete,
+          color: ColorsBase.greyLight,
+        ),
+        onPressed: () => showDialog(
+          context: context,
+          builder: (context) => removeMemberDialog(user),
+        ),
+      );
+    }
+
+    Widget leaveIcon(User user) {
+      return IconButton(
+        icon: const Icon(Icons.exit_to_app),
+        color: ColorsBase.greyLight,
+        onPressed: () => showDialog(
+          context: context,
+          builder: (context) => leaveGroupDialog(user),
+        ),
+      );
+    }
+
     if (widget.group.users.isEmpty) {
       return Container(
         padding: Spacing.standardContainer,
@@ -52,22 +95,25 @@ class _MemberListState extends State<MemberList> {
         ),
       );
     }
+
     return ListView.separated(
       shrinkWrap: true,
       padding: const EdgeInsets.symmetric(vertical: Spacing.small),
       itemCount: widget.group.users.length,
       itemBuilder: (context, index) {
+        final group = widget.group;
+        final user = widget.group.users[index];
         return ListTile(
-            title: Text(widget.group.users[index].name),
-            trailing: IconButton(
-              icon: const Icon(Icons.delete),
-              color: ColorsBase.greyLight,
-              onPressed: () => showDialog(
-                context: context,
-                builder: (context) =>
-                    removeMemberDialog(widget.group.users[index]),
-              ),
-            ));
+            title: Row(
+              children: <Widget>[
+                Text(user.name),
+                const SizedBox(width: Spacing.tiny),
+                if (user == group.admin)
+                  const Icon(Icons.shield, color: ColorsBase.yellow),
+              ],
+            ),
+            trailing:
+                user == db.loggedUser ? leaveIcon(user) : removeIcon(user));
       },
       separatorBuilder: (BuildContext context, int index) {
         return const Divider();

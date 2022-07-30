@@ -9,7 +9,7 @@ class Group extends ChangeNotifier {
   late final String picturePath = "assets/images/group_picture/default.png";
   final List<Message> messages = [];
   final List<User> users = [];
-  User? _admin;
+  User? admin;
 
   Group({required this.name});
 
@@ -31,6 +31,6 @@ class Group extends ChangeNotifier {
   }
 
   void setAdmin(User user) {
-    _admin = user;
+    admin = user;
   }
 }
