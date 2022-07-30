@@ -37,7 +37,9 @@ class HomeView extends StatelessWidget {
         padding: Spacing.fullWidthContainer,
         child: Consumer<Database>(
           builder: (context, db, child) {
-            return GroupList(db.groups);
+            final groups =
+                db.groups.where((group) => group.users.contains(user)).toList();
+            return GroupList(groups);
           },
         ),
       ),

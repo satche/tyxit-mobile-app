@@ -5,6 +5,7 @@ import 'package:tyxit_mobile_app/constants/colors.dart';
 import '../components/setting.dart';
 import '../database/database.dart';
 import '../database/models/group.dart';
+import '../database/models/user.dart';
 
 class GroupSettingArgs {
   final Group group;
@@ -18,14 +19,19 @@ class GroupSetting extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as GroupSettingArgs;
+    final db = Provider.of<Database>(context, listen: false);
 
     void removeCurrentGroup() {
-      final db = Provider.of<Database>(context, listen: false);
       db.removeGroup(args.group);
       Navigator.popAndPushNamed(context, '/');
     }
 
-    Widget confirmationDialog() {
+    void leaveCurrentGroup(User user) {
+      args.group.removeUser(user);
+      Navigator.popAndPushNamed(context, '/');
+    }
+
+    Widget deleteGroupDialog() {
       return AlertDialog(
         title: const Text('Delete group'),
         content: const Text('Are you sure you want to delete this group?'),
@@ -42,6 +48,23 @@ class GroupSetting extends StatelessWidget {
       );
     }
 
+    Widget leaveGroupDialog() {
+      return AlertDialog(
+        title: const Text('Leave group'),
+        content: const Text('Are you sure you want to leave this group?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Cancel'),
+            onPressed: () => Navigator.pop(context),
+          ),
+          TextButton(
+            child: const Text('Leave group'),
+            onPressed: () => leaveCurrentGroup(db.loggedUser!),
+          ),
+        ],
+      );
+    }
+
     final Setting setting = Setting(
       entity: args.group,
       child: <Widget>[
@@ -51,10 +74,18 @@ class GroupSetting extends StatelessWidget {
               arguments: args.group),
         ),
         ListTile(
+          title: const Text('Leave group'),
+          onTap: () => showDialog(
+            context: context,
+            builder: (context) => leaveGroupDialog(),
+          ),
+          textColor: ColorsBase.red,
+        ),
+        ListTile(
           title: const Text('Delete group'),
           onTap: () => showDialog(
             context: context,
-            builder: (context) => confirmationDialog(),
+            builder: (context) => deleteGroupDialog(),
           ),
           textColor: ColorsBase.red,
         ),
