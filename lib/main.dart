@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/views/group_setting.dart';
+import 'package:tyxit_mobile_app/views/join_group.dart';
 import 'package:tyxit_mobile_app/views/login.dart';
 import 'package:tyxit_mobile_app/views/members_management.dart';
 import 'database/database.dart';
@@ -29,6 +30,7 @@ class MainApp extends StatelessWidget {
       routes: {
         '/login': (context) => const LoginView(),
         '/': (context) => const HomeView(),
+        '/join_group': (context) => const JoinGroupView(),
         '/create_group': (context) => const CreateGroupView(),
         '/groups': (context) => const ChatView(),
         '/group_setting': (context) => const GroupSetting(),

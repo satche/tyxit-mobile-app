@@ -44,7 +44,7 @@ class HomeView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.pushNamed(context, '/create_group'),
+        onPressed: () => Navigator.pushNamed(context, '/join_group'),
         tooltip: 'Add group',
         child: const Icon(Icons.add),
       ),
