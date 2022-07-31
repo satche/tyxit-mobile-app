@@ -249,7 +249,8 @@ class _MemberListState extends State<MemberList> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          if (widget.group.pendingUsers.isNotEmpty) ...[
+          if (widget.group.pendingUsers.isNotEmpty &&
+              db.loggedUser == widget.group.admin) ...[
             const Text(
               "Pending members",
               style: TextStyle(fontSize: 12, color: ColorsBase.yellow),
