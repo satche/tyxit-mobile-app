@@ -27,9 +27,9 @@ class _CreateGroupViewState extends State<CreateGroupView> {
   @override
   Widget build(BuildContext context) {
     final db = Provider.of<Database>(context, listen: false);
-    final newGroup = Group(fieldController.text);
 
     void createAndGotoGroup() {
+      final newGroup = Group(fieldController.text);
       db.addGroup(group: newGroup, admin: db.loggedUser!);
       Navigator.popAndPushNamed(context, "/groups",
           arguments: ChatArgs(newGroup));
