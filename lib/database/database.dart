@@ -9,11 +9,11 @@ class Database extends ChangeNotifier {
   late User? loggedUser;
 
   Database() {
-    final User user1 = User(name: 'Thomas');
-    final User user2 = User(name: 'Simon');
-    final User user3 = User(name: 'Raphael');
+    final User user1 = User('Thomas');
+    final User user2 = User('Simon');
+    final User user3 = User('Raphael');
 
-    final Group group1 = Group(name: 'Blue Banana');
+    final Group group1 = Group('Blue Banana');
     addUser(user1);
     addUser(user2);
     addUser(user3);
@@ -43,8 +43,8 @@ class Database extends ChangeNotifier {
     notifyListeners();
   }
 
-  void addMessageToGroup(Group group, Message message) {
-    group.addMessage(message);
+  void addMessageToGroup(BuildContext context, Group group, Message message) {
+    group.addMessage(context, message);
     notifyListeners();
   }
 

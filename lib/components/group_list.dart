@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../constants/spacing.dart';
 import '../database/models/group.dart';
 import '../views/chat.dart';
@@ -7,15 +8,6 @@ class GroupList extends StatelessWidget {
   final List<Group> groups;
 
   const GroupList(this.groups, {Key? key}) : super(key: key);
-
-  Widget? getLastMessage(Group group) {
-    if (group.messages.isEmpty) {
-      return null;
-    }
-    final lastMessage = group.messages.last;
-    return Text("${lastMessage.author.name}: ${lastMessage.text}",
-        style: const TextStyle(fontSize: 12));
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,22 +22,27 @@ class GroupList extends StatelessWidget {
       );
     }
 
-    return ListView.separated(
+    return ListView.builder(
       itemCount: groups.length,
       itemBuilder: (context, index) {
         final group = groups[index];
+        final lastMessage =
+            group.messages.isEmpty ? null : group.messages.first;
+
         return Card(
           child: ListTile(
             leading: Image(image: AssetImage(group.picturePath)),
             title: Text(group.name),
-            subtitle: getLastMessage(group),
+            subtitle: Text(
+              lastMessage == null
+                  ? ""
+                  : "${lastMessage.author.name}: ${lastMessage.text}",
+              style: const TextStyle(fontSize: 12),
+            ),
             onTap: () => Navigator.pushNamed(context, "/groups",
                 arguments: ChatArgs(group)),
           ),
         );
-      },
-      separatorBuilder: (BuildContext context, int index) {
-        return const Divider();
       },
     );
   }

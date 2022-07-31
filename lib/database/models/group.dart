@@ -12,13 +12,14 @@ class Group extends ChangeNotifier {
   final List<User> users = [];
   User? admin;
 
-  Group({required this.name});
+  Group(this.name);
 
-  void addMessage(Message message) {
+  void addMessage(BuildContext context, Message message) {
     messages.insert(0, message);
+    Provider.of<Database>(context, listen: false).hasUpdateded();
   }
 
-  void changeName(context, dynamic group, String newName) {
+  void changeName(BuildContext context, dynamic group, String newName) {
     name = newName;
     Provider.of<Database>(context, listen: false).hasUpdateded();
   }
