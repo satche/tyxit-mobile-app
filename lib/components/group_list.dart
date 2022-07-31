@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../constants/spacing.dart';
 import '../database/models/group.dart';
 import '../views/chat.dart';

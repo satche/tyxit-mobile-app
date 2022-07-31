@@ -16,13 +16,7 @@ class CreateGroupView extends StatefulWidget {
 
 class _CreateGroupViewState extends State<CreateGroupView> {
   final fieldController = TextEditingController();
-
-  void createAndGotoGroup() {
-    final db = Provider.of<Database>(context, listen: false);
-    final group = Group(fieldController.text);
-    db.addGroup(group: group, admin: db.loggedUser!);
-    Navigator.popAndPushNamed(context, "/groups", arguments: ChatArgs(group));
-  }
+  String searchRequest = "";
 
   @override
   void dispose() {
@@ -32,6 +26,43 @@ class _CreateGroupViewState extends State<CreateGroupView> {
 
   @override
   Widget build(BuildContext context) {
+    final db = Provider.of<Database>(context, listen: false);
+    final newGroup = Group(fieldController.text);
+
+    void createAndGotoGroup() {
+      db.addGroup(group: newGroup, admin: db.loggedUser!);
+      Navigator.popAndPushNamed(context, "/groups",
+          arguments: ChatArgs(newGroup));
+    }
+
+    askToJoinGroup(Group group) {
+      group.addUser(db.loggedUser!);
+      Navigator.popAndPushNamed(context, "/");
+    }
+
+    Widget askToJoinGroupDialog(Group group) {
+      return AlertDialog(
+        title: Text("Join group"),
+        content: Text("Do you want to join ${group.name}?"),
+        actions: [
+          ElevatedButton(
+            child: const Text("Cancel"),
+            onPressed: () => Navigator.pop(context),
+          ),
+          ElevatedButton(
+            child: const Text("Join"),
+            onPressed: () => askToJoinGroup(group),
+          ),
+        ],
+      );
+    }
+
+    void updateSearchRequest(String value) {
+      setState(() {
+        searchRequest = value;
+      });
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create Group'),
@@ -49,6 +80,44 @@ class _CreateGroupViewState extends State<CreateGroupView> {
                 labelText: 'Group Name',
               ),
             ),
+
+            // Test new search feature
+
+            const Divider(),
+
+            TextField(
+              onChanged: ((value) => updateSearchRequest(value)),
+              decoration: const InputDecoration(
+                icon: Icon(Icons.search),
+                labelText: 'Search',
+              ),
+            ),
+            ListView.separated(
+              padding: const EdgeInsets.symmetric(vertical: Spacing.medium),
+              shrinkWrap: true,
+              itemCount: db.groups.length,
+              itemBuilder: (BuildContext context, int index) {
+                final group = db.groups[index];
+                final hasUserJoined = group.users.contains(db.loggedUser!);
+                if (!hasUserJoined &&
+                    group.name
+                        .toLowerCase()
+                        .contains(searchRequest.toLowerCase())) {
+                  return ListTile(
+                    leading: Image(image: AssetImage(group.picturePath)),
+                    title: Text(group.name),
+                    onTap: () => showDialog(
+                      context: context,
+                      builder: (context) => askToJoinGroupDialog(group),
+                    ),
+                  );
+                }
+                return Container();
+              },
+              separatorBuilder: (BuildContext context, int index) {
+                return const Divider();
+              },
+            )
           ],
         ),
       ),
