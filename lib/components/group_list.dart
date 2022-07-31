@@ -8,6 +8,15 @@ class GroupList extends StatelessWidget {
 
   const GroupList(this.groups, {Key? key}) : super(key: key);
 
+  Widget? getLastMessage(Group group) {
+    if (group.messages.isEmpty) {
+      return null;
+    }
+    final lastMessage = group.messages.last;
+    return Text("${lastMessage.author.name}: ${lastMessage.text}",
+        style: const TextStyle(fontSize: 12));
+  }
+
   @override
   Widget build(BuildContext context) {
     if (groups.isEmpty) {
@@ -20,6 +29,7 @@ class GroupList extends StatelessWidget {
         ),
       );
     }
+
     return ListView.separated(
       itemCount: groups.length,
       itemBuilder: (context, index) {
@@ -28,6 +38,7 @@ class GroupList extends StatelessWidget {
           child: ListTile(
             leading: Image(image: AssetImage(group.picturePath)),
             title: Text(group.name),
+            subtitle: getLastMessage(group),
             onTap: () => Navigator.pushNamed(context, "/groups",
                 arguments: ChatArgs(group)),
           ),

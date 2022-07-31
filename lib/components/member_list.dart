@@ -127,6 +127,7 @@ class _MemberListState extends State<MemberList> {
         children: <Widget>[
           IconButton(
             icon: const Icon(Icons.check),
+            tooltip: 'Accept user',
             color: ColorsBase.green,
             onPressed: () => showDialog(
               context: context,
@@ -135,6 +136,7 @@ class _MemberListState extends State<MemberList> {
           ),
           IconButton(
             icon: const Icon(Icons.close),
+            tooltip: "Deny user",
             color: ColorsBase.red,
             onPressed: () => showDialog(
               context: context,
@@ -146,23 +148,27 @@ class _MemberListState extends State<MemberList> {
     }
 
     // Remove member
-    Widget removeIcon(User user) {
-      return IconButton(
-        icon: const Icon(
-          Icons.delete,
-          color: ColorsBase.greyLight,
-        ),
-        onPressed: () => showDialog(
-          context: context,
-          builder: (context) => removeMemberDialog(user),
-        ),
-      );
+    Widget? removeIcon(User user) {
+      if (db.loggedUser == widget.group.admin) {
+        return IconButton(
+          icon: const Icon(
+            Icons.delete,
+            color: ColorsBase.greyLight,
+          ),
+          onPressed: () => showDialog(
+            context: context,
+            builder: (context) => removeMemberDialog(user),
+          ),
+        );
+      }
+      return null;
     }
 
     // Leave group
     Widget leaveIcon(User user) {
       return IconButton(
         icon: const Icon(Icons.exit_to_app),
+        tooltip: "Leave group",
         color: ColorsBase.greyLight,
         onPressed: () => showDialog(
           context: context,
@@ -207,7 +213,13 @@ class _MemberListState extends State<MemberList> {
                   Text(user.name),
                   const SizedBox(width: Spacing.tiny),
                   if (user == group.admin)
-                    const Icon(Icons.shield, color: ColorsBase.yellow),
+                    const Tooltip(
+                      message: 'Admin',
+                      child: Icon(
+                        Icons.shield,
+                        color: ColorsBase.yellow,
+                      ),
+                    ),
                 ],
               ),
               trailing:
