@@ -17,6 +17,11 @@ class MemberList extends StatefulWidget {
 class _MemberListState extends State<MemberList> {
   /* Actions
    ********************************/
+  void leaveCurrentGroup(User user) {
+    widget.group.removeUser(user);
+    Navigator.popAndPushNamed(context, '/');
+  }
+
   void removeMember(User user) {
     setState(() {
       widget.group.removeUser(user);
@@ -65,9 +70,14 @@ class _MemberListState extends State<MemberList> {
     }
 
     Widget leaveGroupDialog(User user) {
+      final adminMessage = db.loggedUser == widget.group.admin
+          ? ' A new admin will be chose if you leave this group.'
+          : null;
+
       return AlertDialog(
         title: const Text('Leave group'),
-        content: const Text('Are you sure you want to leave this group?'),
+        content:
+            Text('Are you sure you want to leave this group?$adminMessage'),
         actions: <Widget>[
           TextButton(
             child: const Text('Cancel'),
@@ -75,7 +85,7 @@ class _MemberListState extends State<MemberList> {
           ),
           TextButton(
             child: const Text('Leave'),
-            onPressed: () => {},
+            onPressed: () => leaveCurrentGroup(user),
           ),
         ],
       );

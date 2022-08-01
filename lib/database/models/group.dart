@@ -39,6 +39,9 @@ class Group extends ChangeNotifier {
 
   void removeUser(User user) {
     users.remove(user);
+    if (user == admin && users.isNotEmpty) {
+      setAdmin(users.first);
+    }
   }
 
   void setAdmin(User user) {
