@@ -5,9 +5,12 @@ import '../database.dart';
 
 class User extends ChangeNotifier {
   String name;
-  late final String picturePath = "assets/images/group_picture/default.png";
+  late final String picturePath;
 
-  User(this.name);
+  User({
+    required this.name,
+    this.picturePath = "assets/images/pictures/default.png",
+  });
 
   void changeName(context, dynamic user, String newName) {
     name = newName;

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tyxit_mobile_app/components/avatar.dart';
 import 'package:tyxit_mobile_app/components/chat/message_list.dart';
+import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../components/chat/chatbar.dart';
 import '../database/models/group.dart';

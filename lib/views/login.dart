@@ -22,7 +22,7 @@ class _LoginViewState extends State<LoginView> {
     void login() {
       final username = fieldController.text;
       final user = db.users.firstWhere((user) => user.name == username,
-          orElse: () => User(username));
+          orElse: () => User(name: username));
       db.loginUser(user);
       Navigator.popAndPushNamed(context, '/');
     }

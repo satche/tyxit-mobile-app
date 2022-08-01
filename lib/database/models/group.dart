@@ -6,14 +6,16 @@ import 'user.dart';
 
 class Group extends ChangeNotifier {
   String name;
-  late final String picturePath = "assets/images/group_picture/default.png";
+  final String picturePath;
   final List<Message> messages = [];
   final List<User> pendingUsers = [];
   final List<User> users = [];
   User? admin;
 
-  Group(this.name);
-
+  Group({
+    required this.name,
+    this.picturePath = "assets/images/pictures/default.png",
+  });
   void addMessage(BuildContext context, Message message) {
     messages.insert(0, message);
     Provider.of<Database>(context, listen: false).hasUpdateded();

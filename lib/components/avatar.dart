@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../constants/colors.dart';
+
 class Avatar extends StatelessWidget {
   final String url;
   final double size;
@@ -10,7 +12,7 @@ class Avatar extends StatelessWidget {
   Widget build(BuildContext context) {
     return CircleAvatar(
       backgroundImage: AssetImage(url),
-      maxRadius: size,
+      maxRadius: size - 5,
     );
   }
 }

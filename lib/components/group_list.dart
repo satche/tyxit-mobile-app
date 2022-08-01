@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/spacing.dart';
 import '../database/models/group.dart';
 import '../views/chat.dart';
+import 'avatar.dart';
 
 class GroupList extends StatelessWidget {
   final List<Group> groups;
@@ -30,7 +31,7 @@ class GroupList extends StatelessWidget {
 
         return Card(
           child: ListTile(
-            leading: Image(image: AssetImage(group.picturePath)),
+            leading: Avatar(url: group.picturePath, size: 30),
             title: Text(group.name),
             subtitle: Text(
               lastMessage == null

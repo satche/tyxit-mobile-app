@@ -29,7 +29,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
     final db = Provider.of<Database>(context, listen: false);
 
     void createAndGotoGroup() {
-      final newGroup = Group(fieldController.text);
+      final newGroup = Group(name: fieldController.text);
       db.addGroup(group: newGroup, admin: db.loggedUser!);
       Navigator.popAndPushNamed(context, "/groups",
           arguments: ChatArgs(newGroup));
@@ -43,7 +43,7 @@ class _CreateGroupViewState extends State<CreateGroupView> {
         padding: Spacing.standardContainer,
         child: Column(
           children: <Widget>[
-            const Avatar(url: 'assets/images/group_picture/default.png'),
+            const Avatar(url: "assets/images/pictures/default.png"),
             Spacing.betweenFields,
             TextField(
               controller: fieldController,

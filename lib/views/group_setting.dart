@@ -51,7 +51,7 @@ class GroupSetting extends StatelessWidget {
     Widget leaveGroupDialog() {
       final adminMessage = db.loggedUser == args.group.admin
           ? ' A new admin will be chose if you leave this group.'
-          : null;
+          : "";
 
       return AlertDialog(
         title: const Text('Leave group'),

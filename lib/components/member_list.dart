@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:tyxit_mobile_app/components/avatar.dart';
 import '../constants/colors.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
@@ -72,7 +73,7 @@ class _MemberListState extends State<MemberList> {
     Widget leaveGroupDialog(User user) {
       final adminMessage = db.loggedUser == widget.group.admin
           ? ' A new admin will be chose if you leave this group.'
-          : null;
+          : "";
 
       return AlertDialog(
         title: const Text('Leave group'),
@@ -200,8 +201,12 @@ class _MemberListState extends State<MemberList> {
           final group = widget.group;
           final user = widget.group.pendingUsers[index];
           return ListTile(
-            contentPadding: const EdgeInsets.all(0),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 0,
+              vertical: Spacing.small,
+            ),
             title: Text(user.name),
+            leading: Avatar(url: user.picturePath, size: 30),
             trailing: pendingIcons(user, group),
           );
         },
@@ -217,23 +222,28 @@ class _MemberListState extends State<MemberList> {
           final group = widget.group;
           final user = widget.group.users[index];
           return ListTile(
-              contentPadding: const EdgeInsets.all(0),
-              title: Row(
-                children: <Widget>[
-                  Text(user.name),
-                  const SizedBox(width: Spacing.tiny),
-                  if (user == group.admin)
-                    const Tooltip(
-                      message: 'Admin',
-                      child: Icon(
-                        Icons.shield,
-                        color: ColorsBase.yellow,
-                      ),
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 0,
+              vertical: Spacing.small,
+            ),
+            title: Row(
+              children: <Widget>[
+                Text(user.name),
+                const SizedBox(width: Spacing.tiny),
+                if (user == group.admin)
+                  const Tooltip(
+                    message: 'Admin',
+                    child: Icon(
+                      Icons.shield,
+                      color: ColorsBase.yellow,
                     ),
-                ],
-              ),
-              trailing:
-                  user == db.loggedUser ? leaveIcon(user) : removeIcon(user));
+                  ),
+              ],
+            ),
+            trailing:
+                user == db.loggedUser ? leaveIcon(user) : removeIcon(user),
+            leading: Avatar(url: user.picturePath, size: 30),
+          );
         },
       );
     }

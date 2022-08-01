@@ -42,7 +42,7 @@ class _SettingState extends State<Setting> {
         alignment: Alignment.center,
         child: Column(
           children: <Widget>[
-            Avatar(url: widget.entity.picturePath),
+            Avatar(url: widget.entity.picturePath, size: 70),
             Spacing.betweenFields,
             SizedBox(
               width: 250,

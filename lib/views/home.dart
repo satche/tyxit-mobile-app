@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
+import '../components/avatar.dart';
 import '../components/group_list.dart';
 import '../components/tyxit_logo.dart';
 import '../constants/spacing.dart';
@@ -27,9 +28,7 @@ class HomeView extends StatelessWidget {
                   arguments: UserArgs(user)),
               tooltip: "Settings",
               iconSize: 40,
-              icon: Image(
-                image: AssetImage(user.picturePath),
-              ),
+              icon: Avatar(url: user.picturePath),
             )
         ],
       ),
