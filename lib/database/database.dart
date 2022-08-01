@@ -28,10 +28,9 @@ class Database extends ChangeNotifier {
     addUser(user2);
     addUser(user3);
 
-    addGroup(group: group1, admin: user1);
-    addGroup(group: group2, admin: user1);
+    addGroup(group: group1, admin: user2);
+    addGroup(group: group2, admin: user3);
 
-    group1.addUser(user2);
     group1.addUser(user3);
 
     loginUser(user1);

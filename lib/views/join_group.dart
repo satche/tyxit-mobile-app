@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/constants/colors.dart';
 
+import '../components/avatar.dart';
 import '../constants/spacing.dart';
 import '../database/database.dart';
 import '../database/models/group.dart';
@@ -86,7 +87,8 @@ class _JoinGroupViewState extends State<JoinGroupView> {
                     .contains(searchRequest.toLowerCase());
                 if (!hasUserJoined && !userIsPending && searchFilter) {
                   return ListTile(
-                    leading: Image(image: AssetImage(group.picturePath)),
+                    contentPadding: const EdgeInsets.all(0),
+                    leading: Avatar(url: group.picturePath),
                     title: Text(group.name),
                     onTap: () => showDialog(
                       context: context,
