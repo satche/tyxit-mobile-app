@@ -79,10 +79,12 @@ class _JoinGroupViewState extends State<JoinGroupView> {
               itemBuilder: (BuildContext context, int index) {
                 final group = db.groups[index];
                 final hasUserJoined = group.users.contains(db.loggedUser!);
-                if (!hasUserJoined &&
-                    group.name
-                        .toLowerCase()
-                        .contains(searchRequest.toLowerCase())) {
+                final userIsPending =
+                    group.pendingUsers.contains(db.loggedUser!);
+                final searchFilter = group.name
+                    .toLowerCase()
+                    .contains(searchRequest.toLowerCase());
+                if (!hasUserJoined && !userIsPending && searchFilter) {
                   return ListTile(
                     leading: Image(image: AssetImage(group.picturePath)),
                     title: Text(group.name),
