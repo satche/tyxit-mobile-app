@@ -1,3 +1,4 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/constants/colors.dart';
@@ -77,6 +78,19 @@ class GroupSetting extends StatelessWidget {
           title: const Text('Manage members'),
           onTap: () => Navigator.pushNamed(context, "/members_management",
               arguments: args.group),
+          trailing: Consumer<Database>(
+            builder: (context, db, child) {
+              return Badge(
+                showBadge: args.group.pendingUsers.isNotEmpty,
+                padding: const EdgeInsets.all(8),
+                badgeColor: ColorsBase.yellow,
+                badgeContent: Text(
+                  args.group.pendingUsers.length.toString(),
+                  style: const TextStyle(fontSize: 14),
+                ),
+              );
+            },
+          ),
         ),
         ListTile(
           title: const Text('Leave group'),

@@ -1,8 +1,8 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:tyxit_mobile_app/components/avatar.dart';
 import 'package:tyxit_mobile_app/components/chat/message_list.dart';
-import '../constants/spacing.dart';
+import 'package:tyxit_mobile_app/constants/colors.dart';
 import '../database/database.dart';
 import '../components/chat/chatbar.dart';
 import '../database/models/group.dart';
@@ -21,30 +21,40 @@ class ChatView extends StatelessWidget {
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as ChatArgs;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Consumer<Database>(builder: (context, db, child) {
-          return Text(args.group.name);
-        }),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings),
-            tooltip: 'Settings',
-            onPressed: () => Navigator.pushNamed(context, '/group_setting',
-                arguments: GroupSettingArgs(args.group)),
-          ),
-        ],
-      ),
-      body: Stack(
-        children: <Widget>[
-          Consumer<Database>(
-            builder: (context, db, child) {
-              return MessageList(args.group.messages);
-            },
-          ),
-          Chatbar(group: args.group)
-        ],
-      ),
-    );
+    return Consumer<Database>(builder: (context, db, child) {
+      return Scaffold(
+        appBar: AppBar(
+          title: Text(args.group.name),
+          actions: [
+            IconButton(
+              tooltip: 'Settings',
+              onPressed: () => Navigator.pushNamed(context, '/group_setting',
+                  arguments: GroupSettingArgs(args.group)),
+              icon: Badge(
+                badgeColor: ColorsBase.yellow,
+                padding: const EdgeInsets.all(2),
+                position: BadgePosition.topEnd(end: -2),
+                showBadge: args.group.pendingUsers.isNotEmpty,
+                badgeContent: Text(
+                  args.group.pendingUsers.length.toString(),
+                  style: const TextStyle(color: ColorsBase.yellow),
+                ),
+                child: const Icon(Icons.settings),
+              ),
+            ),
+          ],
+        ),
+        body: Stack(
+          children: <Widget>[
+            Consumer<Database>(
+              builder: (context, db, child) {
+                return MessageList(args.group.messages);
+              },
+            ),
+            Chatbar(group: args.group)
+          ],
+        ),
+      );
+    });
   }
 }

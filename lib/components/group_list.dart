@@ -1,5 +1,9 @@
+import 'package:badges/badges.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../constants/colors.dart';
 import '../constants/spacing.dart';
+import '../database/database.dart';
 import '../database/models/group.dart';
 import '../views/chat.dart';
 import 'avatar.dart';
@@ -31,7 +35,17 @@ class GroupList extends StatelessWidget {
 
         return Card(
           child: ListTile(
-            leading: Avatar(url: group.picturePath, size: 30),
+            leading: Badge(
+              showBadge: group.pendingUsers.isNotEmpty,
+              badgeColor: ColorsBase.yellow,
+              padding: const EdgeInsets.all(6),
+              position: BadgePosition.topEnd(end: 0, top: 0),
+              child: Consumer<Database>(
+                builder: (context, db, child) {
+                  return Avatar(url: group.picturePath, size: 30);
+                },
+              ),
+            ),
             title: Text(group.name),
             subtitle: Text(
               lastMessage == null
