@@ -81,7 +81,8 @@ class GroupSetting extends StatelessWidget {
           trailing: Consumer<Database>(
             builder: (context, db, child) {
               return Badge(
-                showBadge: args.group.pendingUsers.isNotEmpty,
+                showBadge: args.group.pendingUsers.isNotEmpty &&
+                    db.loggedUser == args.group.admin,
                 padding: const EdgeInsets.all(8),
                 badgeColor: ColorsBase.yellow,
                 badgeContent: Text(

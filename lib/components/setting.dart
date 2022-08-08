@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tyxit_mobile_app/components/avatar.dart';
 import '../constants/spacing.dart';
+import '../database/database.dart';
+import '../database/models/group.dart';
 
 class Setting extends StatefulWidget {
   final List<Widget>? child;
@@ -20,6 +23,16 @@ class _SettingState extends State<Setting> {
 
   void changeName(BuildContext context, newName) {
     widget.entity.changeName(context, widget.entity, newName);
+  }
+
+  bool canUserEdit(context) {
+    final db = Provider.of<Database>(context, listen: false);
+    if (widget.entity.runtimeType == Group) {
+      final userIsGroupAdmin = db.loggedUser == widget.entity.admin;
+      return userIsGroupAdmin;
+    } else {
+      return true;
+    }
   }
 
   @override
@@ -46,17 +59,19 @@ class _SettingState extends State<Setting> {
             Spacing.betweenFields,
             SizedBox(
               width: 250,
-              child: TextFormField(
-                controller: fieldController..text = widget.entity.name,
-                onEditingComplete: () =>
-                    changeName(context, fieldController.text),
-                textAlign: TextAlign.center,
-                decoration: const InputDecoration(
-                  border: InputBorder.none,
-                  prefixIcon: SizedBox(width: 0),
-                  suffixIcon: Icon(Icons.edit),
-                ),
-              ),
+              child: canUserEdit(context)
+                  ? TextFormField(
+                      controller: fieldController..text = widget.entity.name,
+                      onEditingComplete: () =>
+                          changeName(context, fieldController.text),
+                      textAlign: TextAlign.center,
+                      decoration: const InputDecoration(
+                        border: InputBorder.none,
+                        prefixIcon: SizedBox(width: 0),
+                        suffixIcon: Icon(Icons.edit),
+                      ),
+                    )
+                  : Text(widget.entity.name, textAlign: TextAlign.center),
             ),
             const SizedBox(height: Spacing.big),
             ListView(

@@ -15,6 +15,8 @@ class GroupList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final db = Provider.of<Database>(context, listen: false);
+
     if (groups.isEmpty) {
       return Container(
         padding: Spacing.standardContainer,
@@ -36,7 +38,8 @@ class GroupList extends StatelessWidget {
         return Card(
           child: ListTile(
             leading: Badge(
-              showBadge: group.pendingUsers.isNotEmpty,
+              showBadge:
+                  group.pendingUsers.isNotEmpty && db.loggedUser == group.admin,
               badgeColor: ColorsBase.yellow,
               padding: const EdgeInsets.all(6),
               position: BadgePosition.topEnd(end: 0, top: 0),

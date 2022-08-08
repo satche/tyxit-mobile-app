@@ -34,7 +34,8 @@ class ChatView extends StatelessWidget {
                 badgeColor: ColorsBase.yellow,
                 padding: const EdgeInsets.all(2),
                 position: BadgePosition.topEnd(end: -2),
-                showBadge: args.group.pendingUsers.isNotEmpty,
+                showBadge: args.group.pendingUsers.isNotEmpty &&
+                    db.loggedUser == args.group.admin,
                 badgeContent: Text(
                   args.group.pendingUsers.length.toString(),
                   style: const TextStyle(color: ColorsBase.yellow),
