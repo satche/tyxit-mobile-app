@@ -24,6 +24,11 @@ class _JoinGroupViewState extends State<JoinGroupView> {
     askToJoinGroup(Group group) {
       group.addUser(db.loggedUser!);
       Navigator.popAndPushNamed(context, "/");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Join request sent to ${group.name}"),
+        ),
+      );
     }
 
     Widget askToJoinGroupDialog(Group group) {
