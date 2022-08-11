@@ -27,6 +27,7 @@ class _JoinGroupViewState extends State<JoinGroupView> {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text("Join request sent to ${group.name}"),
+          backgroundColor: ColorsBase.yellow,
         ),
       );
     }
